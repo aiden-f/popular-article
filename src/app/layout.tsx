@@ -20,6 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className="light h-full" suppressHydrationWarning>
+      <head>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2723326980364617"
+          crossOrigin="anonymous"></script>
+      </head>
       <body className={`${outfit.variable} font-sans min-h-full flex flex-col`}>
         {children}
       </body>
