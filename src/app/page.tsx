@@ -159,11 +159,6 @@ export default function Home() {
           </div>
         )}
       </main>
-
-      {/* Footer */}
-      <footer className="border-t border-slate-100 px-6 py-12 md:px-12 text-center bg-slate-50/50">
-        <p className="text-sm text-slate-500 font-medium">© 2026 Papular Curation. 반려견을 위한 최고의 선택.</p>
-      </footer>
     </div>
   );
 }
