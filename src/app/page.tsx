@@ -12,10 +12,15 @@ const WideSearchCoupangBanner = dynamic(
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("전체");
 
-  const filteredArticles = articleList.filter((article) =>
-    article.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const categories = ["전체", ...Array.from(new Set(articleList.map((a) => a.category)))];
+
+  const filteredArticles = articleList.filter((article) => {
+    const matchesSearch = article.title.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = selectedCategory === "전체" || article.category === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -82,22 +87,43 @@ export default function Home() {
           </motion.p>
         </header>
 
-        {/* Search Bar */}
-        <div className="mb-12 relative max-w-md">
-          <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-slate-400">
-            <Search size={18} />
+        {/* Search & Categories Section */}
+        <div className="mb-12 space-y-8">
+          {/* Search Bar */}
+          <div className="relative max-w-md">
+            <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none text-slate-400">
+              <Search size={18} />
+            </div>
+            <input
+              type="text"
+              placeholder="궁금한 정보를 검색해보세요..."
+              className="w-full bg-white/70 border border-slate-200 rounded-2xl py-4 pl-12 pr-4 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all placeholder:text-slate-400 backdrop-blur-md"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
           </div>
-          <input
-            type="text"
-            placeholder="궁금한 정보를 검색해보세요..."
-            className="w-full bg-white/70 border border-slate-200 rounded-2xl py-4 pl-12 pr-4 focus:outline-none focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-500 transition-all placeholder:text-slate-400 backdrop-blur-md"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
+
+          {/* Category Tabs */}
+          <div className="flex flex-wrap gap-2 md:gap-3">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
+                  selectedCategory === category
+                    ? "bg-indigo-600 text-white shadow-lg shadow-indigo-200"
+                    : "bg-white border border-slate-100 text-slate-500 hover:border-indigo-200 hover:text-indigo-600 hover:bg-indigo-50/50"
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Article Grid */}
         <motion.section
+          key={selectedCategory + searchQuery} // Force re-animation on filter change
           variants={containerVariants}
           initial="hidden"
           animate="visible"
@@ -110,24 +136,29 @@ export default function Home() {
                   variants={itemVariants}
                   whileHover={{ y: -8, transition: { duration: 0.2 } }}
                   onClick={() => window.open(article.url, "_blank")}
-                  className="group relative flex flex-col h-full rounded-xl border border-slate-100 bg-white p-6 hover:border-indigo-100 transition-all cursor-pointer"
+                  className="group relative flex flex-col h-full rounded-xl border border-slate-100 bg-white p-6 hover:border-indigo-100 transition-all cursor-pointer shadow-sm hover:shadow-md"
                 >
-                  <h2 className="text-xl font-bold mb-3 line-clamp-2 leading-tight text-slate-900 group-hover:text-indigo-600 transition-colors">
-                    {article.title}
-                  </h2>
+                  <div className="mb-4">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-500 bg-indigo-50 px-2 py-1 rounded-md mb-3 inline-block">
+                      {article.category}
+                    </span>
+                    <h2 className="text-xl font-bold line-clamp-2 leading-tight text-slate-900 group-hover:text-indigo-600 transition-colors">
+                      {article.title}
+                    </h2>
+                  </div>
 
                   {article.desc ? (
-                    <p className="text-slate-600 text-sm mb-4 flex-grow-0 leading-relaxed">
+                    <p className="text-slate-600 text-sm mb-4 flex-grow leading-relaxed">
                       {article.desc}
                     </p>
                   ) : (
-                    <p className="text-slate-400 text-sm mb-4 flex-grow-0 italic">
+                    <p className="text-slate-400 text-sm mb-4 flex-grow italic">
                       요약 내용이 곧 추가될 예정입니다.
                     </p>
                   )}
 
                   {article.tag && article.tag.length > 0 && (
-                    <div className="flex flex-wrap gap-1.5 mb-6">
+                    <div className="flex flex-wrap gap-1.5 mt-auto">
                       {article.tag.map((tag, tagIdx) => (
                         <span
                           key={tagIdx}
@@ -139,15 +170,6 @@ export default function Home() {
                     </div>
                   )}
                 </motion.article>
-
-                {/* Insert Banner Every 3 Items */}
-                {/* {(index + 1) % 3 === 0 && (
-                  <div className="col-span-1 sm:col-span-2 lg:col-span-3 py-4">
-                    <WideSearchCoupangBanner
-                      keyword={shuffledKeywords[Math.floor(index / 3) % shuffledKeywords.length]}
-                    />
-                  </div>
-                )} */}
               </React.Fragment>
             )
           })}
