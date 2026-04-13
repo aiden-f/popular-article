@@ -109,11 +109,10 @@ export default function Home() {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
-                  selectedCategory === category
-                    ? "bg-indigo-600 text-white shadow-lg shadow-indigo-200"
-                    : "bg-white border border-slate-100 text-slate-500 hover:border-indigo-200 hover:text-indigo-600 hover:bg-indigo-50/50"
-                }`}
+                className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 cursor-pointer ${selectedCategory === category
+                  ? "bg-indigo-600 text-white shadow-lg shadow-indigo-200"
+                  : "bg-white border border-slate-100 text-slate-500 hover:border-indigo-200 hover:text-indigo-600 hover:bg-indigo-50/50"
+                  }`}
               >
                 {category}
               </button>
@@ -162,7 +161,7 @@ export default function Home() {
                       {article.tag.map((tag, tagIdx) => (
                         <span
                           key={tagIdx}
-                          className="text-[12px] font-medium px-2 py-0.5 rounded-md bg-slate-50 text-slate-500 border border-slate-100 group-hover:bg-indigo-50 group-hover:text-indigo-600 group-hover:border-indigo-100 transition-colors"
+                          className="text-[12px] font-medium px-2 py-0.5 rounded-md bg-slate-50 text-slate-500 border border-slate-100 group-hover:bg-indigo-50 group-hover:border-indigo-100 transition-colors"
                         >
                           {tag}
                         </span>
