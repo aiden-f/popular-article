@@ -141,13 +141,13 @@ export default function Home() {
                 </motion.article>
 
                 {/* Insert Banner Every 3 Items */}
-                {(index + 1) % 3 === 0 && (
+                {/* {(index + 1) % 3 === 0 && (
                   <div className="col-span-1 sm:col-span-2 lg:col-span-3 py-4">
                     <WideSearchCoupangBanner
                       keyword={shuffledKeywords[Math.floor(index / 3) % shuffledKeywords.length]}
                     />
                   </div>
-                )}
+                )} */}
               </React.Fragment>
             )
           })}
