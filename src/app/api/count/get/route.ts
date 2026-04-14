@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
+import { GRAPHQL_ENDPOINT } from '@/lib/constants';
 
 /**
  * GraphQL API 호출을 위한 Route Handler 템플릿
  */
 export async function POST(request: Request) {
     try {
-        const GRAPHQL_ENDPOINT = 'http://localhost:4000/graphql';
         const query = `
             query Query($url: String!) {
                 GetAccumulatedVisitCount(url: $url)
