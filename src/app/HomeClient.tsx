@@ -41,7 +41,11 @@ export default function Home() {
     },
   };
 
-  const [shuffledKeywords, setShuffledKeywords] = useState(['오리젠', '카르나4', '벨칸도', '브릿', '이즈칸', '뉴트리소스', '플래티넘 사료', '몬지', '디어니스트키친', '지위픽', '테라카니스', '로얄캐닌', '나우', '고네이티브', '그랜마루시', '보나시보', '보레알', '스맥', '스몰배치', '스텔라 & 츄이스', '에프디에이', '레드반', '오픈팜', '카니러브', '허즈', '힐스']);
+  const [shuffledKeywords, setShuffledKeywords] = useState(['오리젠', '카르나4',
+    '벨칸도', '브릿', '이즈칸', '뉴트리소스', '플래티넘 사료', '몬지', '디어니스트키친', '지위픽',
+    '테라카니스', '로얄캐닌', '나우', '고네이티브', '그랜마루시', '보나시보', '보레알', '스맥',
+    '스몰배치', '스텔라 & 츄이스', '에프디에이', '레드반 에어드라이', '오픈팜', '카니러브', '허즈', '힐스', '이돌로 사료', '오뤼고 사료',
+    '나우 사료', '굿씨 사료', '닥터독 사료', '반려동물 오메가3 영양제', '퍼피 사료', '강아지 관절영양제', '강아지 유산균', '눈물 사료']);
 
   useEffect(() => {
     setShuffledKeywords(prev => [...prev].sort(() => Math.random() - 0.5));
@@ -65,6 +69,10 @@ export default function Home() {
 
     updateAndFetchCount();
   }, []);
+
+  useEffect(() => {
+    setShuffledKeywords(prev => [...prev].sort(() => Math.random() - 0.5));
+  }, [selectedCategory])
 
   return (
     <div className="relative min-h-screen bg-white text-slate-900 selection:bg-indigo-100 selection:text-indigo-900">
@@ -198,6 +206,15 @@ export default function Home() {
                     </div>
                   )}
                 </motion.article>
+
+                {/* 3rd content마다 쿠팡 배너 노출 */}
+                {(index + 1) % 3 === 0 && (
+                  <div className="col-span-full my-4">
+                    <WideSearchCoupangBanner
+                      keyword={shuffledKeywords[Math.floor(index / 3) % shuffledKeywords.length]}
+                    />
+                  </div>
+                )}
               </React.Fragment>
             )
           })}

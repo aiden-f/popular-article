@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import HomeClient from "./HomeClient";
 import Script from "next/script";
+import Ad from "@/components/Ad";
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -75,6 +76,7 @@ export default function Page() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <HomeClient />
+      <Ad />
     </>
   );
 }
