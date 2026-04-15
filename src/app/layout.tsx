@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import { VisitCounter } from "@/components/VisitCounter";
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -29,6 +30,7 @@ export default function RootLayout({
           crossOrigin="anonymous"></script>
       </head>
       <body className={`${outfit.variable} font-sans min-h-screen flex flex-col bg-white`}>
+        <VisitCounter />
         <div className="flex-grow">
           {children}
         </div>

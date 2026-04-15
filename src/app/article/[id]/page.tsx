@@ -8,6 +8,7 @@ import { ArticleSideAd } from "@/components/ArticleSideAd";
 import { WideSearchCoupangBanner } from "@/components/WideSearchCoupangBanner";
 import { coupangAdsKeyword } from "@/data/adKeyword";
 import { ArticleImageGallery } from "@/components/ArticleImageGallery";
+import { ViewCountBadge } from "@/components/ViewCountBadge";
 
 // 빌드 타임에 모든 아티클 경로를 정적 생성 (data의 id 기반)
 export function generateStaticParams() {
@@ -100,9 +101,6 @@ export default async function ArticlePage({
       .filter((p) => p.length > 0)
     : [];
 
-  // 광고 키워드: 태그에서 추출
-  const adKeyword = article.tag?.[0]?.replace("#", "") || article.category;
-
   // JSON-LD 구조화 데이터
   const jsonLd = {
     "@context": "https://schema.org",
@@ -134,6 +132,8 @@ export default async function ArticlePage({
       />
 
       <div className="relative min-h-screen bg-white text-slate-900 selection:bg-indigo-100 selection:text-indigo-900">
+        {/* 방문자 수 표시 */}
+        <ViewCountBadge />
         {/* Soft Background Accents */}
         <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
           <div className="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-indigo-50 blur-[120px] rounded-full opacity-60" />
@@ -145,7 +145,7 @@ export default async function ArticlePage({
         <div className="relative z-10 flex justify-center">
 
           {/* 좌측 광고 사이드바 — xl 이상에서만 표시 */}
-          <ArticleSideAd keyword={adKeyword} />
+          <ArticleSideAd />
 
           {/* 메인 콘텐츠 */}
           <main className="w-full max-w-4xl px-6 py-10 md:px-12 md:py-16">

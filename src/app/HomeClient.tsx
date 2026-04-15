@@ -7,6 +7,7 @@ import { Search, Sparkles } from "lucide-react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
+import { ViewCountBadge } from "@/components/ViewCountBadge";
 const WideSearchCoupangBanner = dynamic(
   () => import("@/components/WideSearchCoupangBanner").then((mod) => mod.WideSearchCoupangBanner),
   { ssr: false }
@@ -15,7 +16,6 @@ const WideSearchCoupangBanner = dynamic(
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("전체");
-  const [viewCount, setViewCount] = useState<number | null>(null);
 
   const categories = ["전체", ...Array.from(new Set(articleList.map((a) => a.category)))];
 
@@ -47,25 +47,6 @@ export default function Home() {
 
   useEffect(() => {
     setShuffledKeywords(prev => [...prev].sort(() => Math.random() - 0.5));
-
-    // 페이지 로드 시 방문 횟수 통계 API 호출
-    const updateAndFetchCount = async () => {
-      try {
-        // 방문 수 증가
-        await fetch('/api/count/add', { method: 'POST' });
-
-        // 최신 방문 수 가져오기
-        const res = await fetch('/api/count/get', { method: 'POST' });
-        const result = await res.json();
-        if (result.success) {
-          setViewCount(result.data.GetAccumulatedVisitCount);
-        }
-      } catch (err) {
-        console.error('Failed to handle visit count:', err);
-      }
-    };
-
-    updateAndFetchCount();
   }, []);
 
   useEffect(() => {
@@ -75,13 +56,7 @@ export default function Home() {
   return (
     <div className="relative min-h-screen bg-white text-slate-900 selection:bg-indigo-100 selection:text-indigo-900">
       {/* View Count Display */}
-      {viewCount !== null && (
-        <div className="absolute top-6 right-6 md:top-10 md:right-12 z-20">
-          <p className="text-[10px] md:text-xs text-slate-300 tracking-tight">
-            <span className="font-bold">{viewCount.toLocaleString()}</span>
-          </p>
-        </div>
-      )}
+      <ViewCountBadge />
 
       {/* Soft Background Accents */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">

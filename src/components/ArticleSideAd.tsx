@@ -11,7 +11,7 @@ const VerticlaSearchCoupangBanner = dynamic(
   { ssr: false }
 );
 
-export function ArticleSideAd({ keyword }: { keyword: string }) {
+export function ArticleSideAd() {
   return (
     <aside className="hidden xl:flex flex-col gap-4 pt-10 pr-6 w-[360px] shrink-0">
       <div className="sticky top-8 flex flex-col gap-4">
@@ -24,7 +24,7 @@ export function ArticleSideAd({ keyword }: { keyword: string }) {
           <div className="h-px flex-1 bg-slate-100" />
         </div>
         {/* 쿠팡 세로형 배너 */}
-        <VerticlaSearchCoupangBanner keyword={coupangAdsKeyword[Math.floor(Math.random() * coupangAdsKeyword.length)]} />
+        <VerticlaSearchCoupangBanner keyword={coupangAdsKeyword[(Math.floor(Math.random() * coupangAdsKeyword.length)) % coupangAdsKeyword.length]} />
       </div>
     </aside>
   );
