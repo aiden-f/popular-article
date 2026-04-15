@@ -209,14 +209,14 @@ export default async function ArticlePage({
                       /^\d+[\.\)]\s/.test(paragraph) ||
                       /^["""]/.test(paragraph);
                     const isListItem = /^[-*·•]\s/.test(paragraph);
-
+                    console.log(paragraph)
                     if (isSubHeading) {
                       return (
                         <h3
                           key={i}
-                          className="text-xl font-bold text-slate-900 mt-8 mb-3 flex items-start gap-2"
+                          className="text-md font-bold text-slate-900 mt-8 mb-3 flex items-start gap-2"
                         >
-                          <span className="inline-block w-1.5 h-1.5 rounded-full bg-indigo-500 mt-2.5 shrink-0" />
+                          {/* <span className="inline-block w-1.5 h-1.5 rounded-full bg-indigo-500 mt-2.5 shrink-0" /> */}
                           {renderTextWithLinks(paragraph)}
                         </h3>
                       );
