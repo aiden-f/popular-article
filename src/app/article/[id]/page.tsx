@@ -9,6 +9,7 @@ import { WideSearchCoupangBanner } from "@/components/WideSearchCoupangBanner";
 import { coupangAdsKeyword } from "@/data/adKeyword";
 import { ArticleImageGallery } from "@/components/ArticleImageGallery";
 import { ViewCountBadge } from "@/components/ViewCountBadge";
+import { renderTextWithLinks } from "@/lib/article";
 
 // 빌드 타임에 모든 아티클 경로를 정적 생성 (data의 id 기반)
 export function generateStaticParams() {
@@ -216,7 +217,7 @@ export default async function ArticlePage({
                           className="text-xl font-bold text-slate-900 mt-8 mb-3 flex items-start gap-2"
                         >
                           <span className="inline-block w-1.5 h-1.5 rounded-full bg-indigo-500 mt-2.5 shrink-0" />
-                          {paragraph}
+                          {renderTextWithLinks(paragraph)}
                         </h3>
                       );
                     }
@@ -229,7 +230,7 @@ export default async function ArticlePage({
                         >
                           <span className="w-1.5 h-1.5 rounded-full bg-slate-300 mt-2.5 shrink-0" />
                           <p className="text-base text-slate-700 leading-relaxed">
-                            {paragraph.replace(/^[-*·•]\s/, "")}
+                            {renderTextWithLinks(paragraph.replace(/^[-*·•]\s/, ""))}
                           </p>
                         </div>
                       );
@@ -240,7 +241,7 @@ export default async function ArticlePage({
                         key={i}
                         className="text-base text-slate-700 leading-[1.85] mb-4"
                       >
-                        {paragraph}
+                        {renderTextWithLinks(paragraph)}
                       </p>
                     );
                   })}

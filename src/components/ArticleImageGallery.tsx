@@ -123,7 +123,7 @@ export function ArticleImageGallery({ images, alt }: ArticleImageGalleryProps) {
       {images.map((src, i) => (
         <div
           key={i}
-          className="mb-10 rounded-2xl border border-slate-100 shadow-sm cursor-pointer group relative overflow-hidden"
+          className="mb-10 border border-slate-100 shadow-sm cursor-pointer group relative overflow-hidden"
           onClick={() => openModal(i)}
         >
           <img
