@@ -81,8 +81,8 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             className="text-4xl font-extrabold tracking-tight md:text-6xl lg:text-7xl mb-6 text-slate-950 leading-tight"
           >
-            강아지 건강 및 <br />
-            <span className="pt-2 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">사료 정보 인기글 모음</span>
+            강아지/고양이 건강 및 <br />
+            <span className="pt-2 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">사료 추천 인기글 모음</span>
           </motion.h1>
 
           <motion.p

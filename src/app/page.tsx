@@ -7,7 +7,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Popular",
-  "description": "강아지 사료 추천 리스트 모음",
+  "description": "강아지/고양이 사료 추천 리스트 모음",
   "url": "https://popular-article.vercel.app",
   "potentialAction": {
     "@type": "SearchAction",
@@ -17,8 +17,8 @@ const jsonLd = {
 };
 
 export const metadata: Metadata = {
-  title: "강아지 사료 추천 리스트 모음 | POPULAR",
-  description: "2025년 최신 강아지 사료 등급표, 수의사 추천 사료, 원료 분석부터 건강 관리 팁까지. 당신의 반려견을 위한 가장 완벽한 정보 큐레이션 플랫폼 Popular입니다.",
+  title: "강아지/고양이 사료 추천 리스트 모음 | POPULAR",
+  description: "2025년 최신 강아지/고양이 사료 등급표, 수의사 추천 사료, 원료 분석부터 건강 관리 팁까지. 당신의 반려견/반려묘를 위한 가장 완벽한 정보 큐레이션 플랫폼 Popular입니다.",
   keywords: [
     "강아지 사료",
     "사료 등급표",
@@ -28,10 +28,13 @@ export const metadata: Metadata = {
     "강아지 영양제",
     "강아지 사료 분석",
     "강아지 음식",
+    '고양이 사료 추천',
+    '고양이 사료 등급',
+    '고양이 영양제'
   ],
   openGraph: {
-    title: "강아지 사료 추천 리스트 모음 | POPULAR",
-    description: "반려견을 위한 최고의 사료 선택 가이드와 건강 팁을 한눈에 확인하세요.",
+    title: "강아지/고양이 사료 추천 리스트 모음 | POPULAR",
+    description: "반려동물을 위한 최고의 사료 선택 가이드와 건강 팁을 한눈에 확인하세요.",
     url: "https://popular-article.vercel.app",
     siteName: "Popular Curation",
     images: [
@@ -47,8 +50,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "강아지 사료 추천 리스트 모음 | POPULAR",
-    description: "반려견을 위한 최고의 사료 선택 가이드와 건강 팁을 제공합니다.",
+    title: "강아지/고양이 사료 추천 리스트 모음 | POPULAR",
+    description: "반려동물을 위한 최고의 사료 선택 가이드와 건강 팁을 제공합니다.",
     images: ["/og-image.jpg"],
   },
   alternates: {
