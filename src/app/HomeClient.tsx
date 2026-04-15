@@ -1,9 +1,11 @@
 "use client";
 
+import { coupangAdsKeyword } from "@/data/adKeyword";
 import { articleList } from "@/data/data";
 import { motion } from "framer-motion";
-import { ExternalLink, Search, Sparkles } from "lucide-react";
+import { Search, Sparkles } from "lucide-react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 const WideSearchCoupangBanner = dynamic(
   () => import("@/components/WideSearchCoupangBanner").then((mod) => mod.WideSearchCoupangBanner),
@@ -41,11 +43,7 @@ export default function Home() {
     },
   };
 
-  const [shuffledKeywords, setShuffledKeywords] = useState(['오리젠', '카르나4',
-    '벨칸도', '브릿', '이즈칸', '뉴트리소스', '플래티넘 사료', '몬지', '디어니스트키친', '지위픽',
-    '테라카니스', '로얄캐닌', '나우', '고네이티브', '그랜마루시', '보나시보', '보레알', '스맥',
-    '스몰배치', '스텔라 & 츄이스', '에프디에이', '레드반 에어드라이', '오픈팜', '카니러브', '허즈', '힐스', '이돌로 사료', '오뤼고 사료',
-    '나우 사료', '굿씨 사료', '닥터독 사료', '반려동물 오메가3 영양제', '퍼피 사료', '강아지 관절영양제', '강아지 유산균', '눈물 사료']);
+  const [shuffledKeywords, setShuffledKeywords] = useState(coupangAdsKeyword);
 
   useEffect(() => {
     setShuffledKeywords(prev => [...prev].sort(() => Math.random() - 0.5));
@@ -171,9 +169,9 @@ export default function Home() {
                 <motion.article
                   variants={itemVariants}
                   whileHover={{ y: -8, transition: { duration: 0.2 } }}
-                  onClick={() => window.open(article.url, "_blank")}
                   className="group relative flex flex-col h-full rounded-xl border border-slate-100 bg-white p-6 hover:border-indigo-100 transition-all cursor-pointer shadow-sm hover:shadow-md"
                 >
+                  <Link href={`/article/${article.id}`} className="absolute inset-0 z-10" aria-label={article.title} />
                   <div className="mb-4">
                     <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-500 bg-indigo-50 px-2 py-1 rounded-md mb-3 inline-block">
                       {article.category}
