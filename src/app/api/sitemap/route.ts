@@ -1,9 +1,11 @@
 import { articleList } from '@/data/data'
 
+// 캐시를 강제로 비활성화하거나 긴 캐시 주기를 직접 제어하기 위해 force-dynamic 사용
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   const BASE_URL = 'https://popular-article.vercel.app'
-  
-  // 기본 페이지 데이터
+
   const staticPages = [
     {
       url: `${BASE_URL}`,
@@ -25,7 +27,6 @@ export async function GET() {
     },
   ]
 
-  // 아티클 페이지 데이터
   const articlePages = articleList.map((article) => ({
     url: `${BASE_URL}/article/${article.id}`,
     lastModified: new Date().toISOString(),
@@ -35,24 +36,23 @@ export async function GET() {
 
   const allPages = [...staticPages, ...articlePages]
 
-  // XML 생성
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${allPages
-  .map(
-    (page) => `  <url>
+      .map(
+        (page) => `  <url>
     <loc>${page.url}</loc>
     <lastmod>${page.lastModified}</lastmod>
     <changefreq>${page.changeFrequency}</changefreq>
     <priority>${page.priority}</priority>
   </url>`
-  )
-  .join('\n')}
+      )
+      .join('\n')}
 </urlset>`
 
   return new Response(sitemapXml, {
     headers: {
-      'Content-Type': 'application/xml',
+      'Content-Type': 'application/xml; charset=utf-8',
       'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate',
     },
   })
