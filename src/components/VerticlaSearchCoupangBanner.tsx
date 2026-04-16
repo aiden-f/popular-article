@@ -29,7 +29,10 @@ export const VerticlaSearchCoupangBanner = ({ keyword, condition }: { keyword: s
           observer.disconnect(); // Only load once
         }
       },
-      { threshold: 0.1 }
+      { 
+        threshold: 0,
+        rootMargin: '200px 0px' 
+      }
     );
 
     if (containerRef.current) {

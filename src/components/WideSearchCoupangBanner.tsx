@@ -29,7 +29,10 @@ export const WideSearchCoupangBanner = ({ keyword, condition }: { keyword: strin
           observer.disconnect(); // Only load once
         }
       },
-      { threshold: 0.1 }
+      {
+        threshold: 0,
+        rootMargin: '300px 0px' // Load 200px before it enters the viewport
+      }
     );
 
     if (containerRef.current) {
