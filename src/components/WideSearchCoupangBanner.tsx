@@ -149,10 +149,15 @@ export const WideSearchCoupangBanner = ({ keyword, condition }: { keyword: strin
               <div className='text-[13px] font-medium line-clamp-2 mb-2 text-slate-800 min-h-[40px] leading-relaxed'>
                 {item.productName}
               </div>
+              {item.isRocket ? <div className='flex items-center justify-end'>
+                <img src='/ad-rocket.png' className='w-[54px] h-[14px]' />
+              </div> : null}
+
               <div className='mt-auto flex items-end justify-end'>
                 <span className='text-[15px] font-bold text-slate-950'>{formatComma(item.productPrice)}</span>
                 <span className='text-slate-400 text-[11px] font-medium ml-0.5 mb-0.5 tracking-tight'>{'원'}</span>
               </div>
+
             </a>
           ))}
         </div>
