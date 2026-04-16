@@ -1,6 +1,5 @@
 import { articleList } from '@/data/data'
 
-// 캐시를 강제로 비활성화하거나 긴 캐시 주기를 직접 제어하기 위해 force-dynamic 사용
 export const dynamic = 'force-dynamic';
 
 export async function GET() {
@@ -52,7 +51,7 @@ ${allPages
 
   return new Response(sitemapXml, {
     headers: {
-      'Content-Type': 'application/xml; charset=utf-8',
+      'Content-Type': 'application/xml',
       'Cache-Control': 'public, s-maxage=86400, stale-while-revalidate',
     },
   })
