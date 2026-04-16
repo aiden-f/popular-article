@@ -1,4 +1,5 @@
 import { articleList } from '@/data/data'
+import moment from 'moment';
 
 export const dynamic = 'force-dynamic';
 
@@ -8,19 +9,19 @@ export async function GET() {
   const staticPages = [
     {
       url: `${BASE_URL}`,
-      lastModified: new Date().toISOString(),
+      lastModified: moment().format('YYYY-MM-DD'),
       changeFrequency: 'daily',
       priority: 1.0,
     },
     {
       url: `${BASE_URL}/about`,
-      lastModified: new Date().toISOString(),
+      lastModified: moment().format('YYYY-MM-DD'),
       changeFrequency: 'monthly',
       priority: 0.8,
     },
     {
       url: `${BASE_URL}/privacy`,
-      lastModified: new Date().toISOString(),
+      lastModified: moment().format('YYYY-MM-DD'),
       changeFrequency: 'yearly',
       priority: 0.5,
     },
@@ -28,7 +29,7 @@ export async function GET() {
 
   const articlePages = articleList.map((article) => ({
     url: `${BASE_URL}/article/${article.id}`,
-    lastModified: new Date().toISOString(),
+    lastModified: moment().format('YYYY-MM-DD'),
     changeFrequency: 'weekly',
     priority: 0.9,
   }))
