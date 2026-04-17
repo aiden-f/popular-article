@@ -3,6 +3,7 @@ import { Outfit } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
 import { VisitCounter } from "@/components/VisitCounter";
+import { Analytics } from '@vercel/analytics/next';
 
 const outfit = Outfit({
   subsets: ["latin"],
@@ -31,6 +32,7 @@ export default function RootLayout({
       </head>
       <body className={`${outfit.variable} font-sans min-h-screen flex flex-col bg-white`}>
         <VisitCounter />
+        <Analytics />
         <div className="flex-grow">
           {children}
         </div>
