@@ -13,12 +13,12 @@ export async function GET() {
       changeFrequency: 'monthly',
       priority: 0.8,
     },
-    {
-      url: `${BASE_URL}/privacy`,
-      lastModified: moment().format('YYYY-MM-DD'),
-      changeFrequency: 'yearly',
-      priority: 0.5,
-    },
+    // {
+    //   url: `${BASE_URL}/privacy`,
+    //   lastModified: moment().format('YYYY-MM-DD'),
+    //   changeFrequency: 'yearly',
+    //   priority: 0.5,
+    // },
   ]
 
   const articlePages = articleList.map((article) => ({
@@ -28,7 +28,7 @@ export async function GET() {
     priority: 0.9,
   }))
 
-  const allPages = [...staticPages, ...articlePages]
+  const allPages = [...articlePages]
 
   const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
