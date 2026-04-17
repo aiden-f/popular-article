@@ -8,12 +8,6 @@ export async function GET() {
 
   const staticPages = [
     {
-      url: `${BASE_URL}`,
-      lastModified: moment().format('YYYY-MM-DD'),
-      changeFrequency: 'daily',
-      priority: 1.0,
-    },
-    {
       url: `${BASE_URL}/about`,
       lastModified: moment().format('YYYY-MM-DD'),
       changeFrequency: 'monthly',
