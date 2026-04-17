@@ -24,7 +24,7 @@ export async function GET() {
   const articlePages = articleList.map((article) => ({
     url: `${BASE_URL}/article/${article.id}`,
     lastModified: moment().format('YYYY-MM-DD'),
-    changeFrequency: 'weekly',
+    changeFrequency: 'daily',
     priority: 0.9,
   }))
 
