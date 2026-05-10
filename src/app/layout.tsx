@@ -26,6 +26,7 @@ export default function RootLayout({
       <head>
         <meta name="google-site-verification" content="WyKP26Fx_jbFkhWTDlky1K1_uVM-H0lgKouwe7sbp9g" />
         <meta name="google-adsense-account" content="ca-pub-2723326980364617" />
+        <meta name="naver-site-verification" content="373df17f51455b669ee95acb6fed9afb05f4bd92" />
         <meta name="referrer" content="no-referrer" />
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2723326980364617"
           crossOrigin="anonymous"></script>
