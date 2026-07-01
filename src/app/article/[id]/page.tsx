@@ -2,7 +2,13 @@ import { articleList } from "@/data/data";
 import { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ExternalLink, Tag, Clock, ChevronRight } from "lucide-react";
+import {
+  ArrowLeft,
+  ExternalLink,
+  Tag,
+  Clock,
+  ChevronRight,
+} from "lucide-react";
 import Script from "next/script";
 import { ArticleSideAd } from "@/components/ArticleSideAd";
 import { WideSearchCoupangBanner } from "@/components/WideSearchCoupangBanner";
@@ -10,6 +16,7 @@ import { coupangAdsKeyword } from "@/data/adKeyword";
 import { ArticleImageGallery } from "@/components/ArticleImageGallery";
 import { ViewCountBadge } from "@/components/ViewCountBadge";
 import { renderTextWithLinks } from "@/lib/article";
+import { MaintenancePage } from "@/app/page";
 
 // 빌드 타임에 모든 아티클 경로를 정적 생성 (data의 id 기반)
 export function generateStaticParams() {
@@ -38,26 +45,23 @@ export async function generateMetadata({
 
   return {
     title: `${article.title} | POPULAR`,
-    description:
-      article.desc ||
-      `${article.title} - 강아지 건강 및 사료 정보`,
+    description: article.desc || `${article.title} - 강아지 건강 및 사료 정보`,
     keywords: article.tag?.map((t) => t.replace("#", "")) || [],
     openGraph: {
       title: `${article.title} | POPULAR`,
       description:
-        article.desc ||
-        `${article.title} - 강아지 건강 및 사료 정보`,
+        article.desc || `${article.title} - 강아지 건강 및 사료 정보`,
       url: `${BASE_URL}/article/${id}`,
       siteName: "Popular Curation",
       images: article.images?.[0]
         ? [
-          {
-            url: article.images[0],
-            width: 1200,
-            height: 630,
-            alt: article.title,
-          },
-        ]
+            {
+              url: article.images[0],
+              width: 1200,
+              height: 630,
+              alt: article.title,
+            },
+          ]
         : [],
       locale: "ko_KR",
       type: "article",
@@ -66,8 +70,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title: `${article.title} | POPULAR`,
       description:
-        article.desc ||
-        `${article.title} - 강아지 건강 및 사료 정보`,
+        article.desc || `${article.title} - 강아지 건강 및 사료 정보`,
       images: article.images?.[0] ? [article.images[0]] : [],
     },
     alternates: {
@@ -97,9 +100,9 @@ export default async function ArticlePage({
   // contents를 단락으로 분리
   const paragraphs = article.contents
     ? article.contents
-      .split("\n")
-      .map((p) => p.trim())
-      .filter((p) => p.length > 0)
+        .split("\n")
+        .map((p) => p.trim())
+        .filter((p) => p.length > 0)
     : [];
 
   // JSON-LD 구조화 데이터
@@ -123,7 +126,16 @@ export default async function ArticlePage({
     },
   };
 
-  const keyword = coupangAdsKeyword[Math.floor(Math.random() * coupangAdsKeyword.length) % coupangAdsKeyword.length]
+  const keyword =
+    coupangAdsKeyword[
+      Math.floor(Math.random() * coupangAdsKeyword.length) %
+        coupangAdsKeyword.length
+    ];
+
+  if (process.env.SITE_ENABLED !== "true") {
+    return <MaintenancePage />;
+  }
+
   return (
     <>
       <Script
@@ -144,7 +156,6 @@ export default async function ArticlePage({
 
         {/* 전체 레이아웃: 좌측 광고 + 메인 콘텐츠 */}
         <div className="relative z-10 flex justify-center">
-
           {/* 좌측 광고 사이드바 — xl 이상에서만 표시 */}
           <ArticleSideAd />
 
@@ -197,7 +208,10 @@ export default async function ArticlePage({
 
             {/* Hero Image — 클릭 시 모달 확대 */}
             {article.images && article.images.length > 0 && (
-              <ArticleImageGallery images={article.images} alt={article.title} />
+              <ArticleImageGallery
+                images={article.images}
+                alt={article.title}
+              />
             )}
 
             {/* Article Content */}
@@ -209,7 +223,7 @@ export default async function ArticlePage({
                       /^\d+[\.\)]\s/.test(paragraph) ||
                       /^["""]/.test(paragraph);
                     const isListItem = /^[-*·•]\s/.test(paragraph);
-                    console.log(paragraph)
+                    console.log(paragraph);
                     if (isSubHeading) {
                       return (
                         <h3
@@ -230,7 +244,9 @@ export default async function ArticlePage({
                         >
                           <span className="w-1.5 h-1.5 rounded-full bg-slate-300 mt-2.5 shrink-0" />
                           <p className="text-base text-slate-700 leading-relaxed">
-                            {renderTextWithLinks(paragraph.replace(/^[-*·•]\s/, ""))}
+                            {renderTextWithLinks(
+                              paragraph.replace(/^[-*·•]\s/, ""),
+                            )}
                           </p>
                         </div>
                       );
@@ -274,7 +290,9 @@ export default async function ArticlePage({
               </article>
             )}
 
-            {keyword ? <WideSearchCoupangBanner keyword={`${keyword}`} /> : null}
+            {keyword ? (
+              <WideSearchCoupangBanner keyword={`${keyword}`} />
+            ) : null}
 
             {/* 컨텐츠가 없는 경우 바로 원문 링크 */}
             {paragraphs.length === 0 && (
